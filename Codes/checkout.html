@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body class="checkout-page">
+    <header>
+        <nav class="navbar">
+            <div class="navdiv">
+                <div class="logo">
+                    <a href="index.html">NinjaPets</a>
+                </div>
+
+                <ul>
+                    <li class="homeli"><a href="about.html">About Us</a></li>
+                    <li class="homeli"><a href="products.html">Products</a></li>
+                </ul>
+
+                <ul>
+                     <!-- Login and Register/Logout and Cart will appear -->
+                    <li id="buttons"></li>
+
+                     <div id="cartWrap" aria-live="polite">
+                        <button id="cartBtn" class="cart-btn" aria-label="Open cart"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg><span id="cartCount" class="cart-count">0</span></button>   
+                    </div>
+                </ul>
+            </div>
+
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <div id="checkoutWrap">
+                <!-- Checkout Modal -->
+                <div id="checkoutModal" class="checkout-modal">
+                    <div class="checkout-modal__backdrop"></div>
+                    <div class="checkout-modal__panel">
+                    <div class="checkout-modal__header">
+                        <h2>Checkout</h2>
+                    </div>
+                    
+                    <div class="checkout-modal__body">
+                        <div id="checkoutItemsContainer"></div>
+                        <div class="checkout-totals">
+                        <span>Total:</span>
+                        <span id="checkoutTotal">$0.00</span>
+                        </div>
+
+                        <form id="shippingForm">
+                        <h3>Shipping Info</h3>
+                        <label>
+                            Name:
+                            <input type="text" id="shipName" required>
+                        </label>
+                        <label>
+                            Address:
+                            <textarea id="shipAddress" required></textarea>
+                        </label>
+                        <label>
+                            Amount to Pay:
+                            <input type="number" id="shipAmount" min="0" step="0.01" required>
+                        </label>
+                        </form>
+                    </div>
+
+                    <div class="checkout-modal__footer">
+                        <div class="checkout-actions">
+                        <button id="clearCheckout" class="danger-btn">Clear All</button>
+                        <button id="confirmCheckout" class="primary-btn">Confirm</button>
+                        <button id="cancelCheckout" class="primary-btn">Cancel</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get elements
+            const confirmBtn = document.getElementById("confirmCheckout");
+            const cancelBtn = document.getElementById("cancelCheckout");
+            const clearAllBtn = document.getElementById("clearCheckout");
+            const closeBtn = document.getElementById("closeCheckout");
+            const checkoutModal = document.getElementById("checkoutModal");
+            const checkoutItemsContainer = document.getElementById("checkoutItemsContainer");
+            const checkoutTotalEl = document.getElementById("checkoutTotal");
+
+            // Get logged-in user & cart key
+            const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+            const cartKey = loggedInUser ? `cart_${loggedInUser.email}` : null;
+
+            // Load cart
+            let cart = cartKey ? JSON.parse(localStorage.getItem(cartKey)) || [] : [];
+
+            // Format price
+            const formatPrice = n => `$${Number(n).toFixed(2)}`;
+
+            // Render cart in checkout modal
+            function renderCheckout() {
+                checkoutItemsContainer.innerHTML = '';
+                if (!cart.length) {
+                    checkoutItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+                    checkoutTotalEl.textContent = formatPrice(0);
+                    return;
+                }
+
+                cart.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'checkout-item';
+                    div.innerHTML = `
+                        <span>${item.name} x ${item.quantity}</span>
+                        <span>${formatPrice(item.price * item.quantity)}</span>
+                    `;
+                    checkoutItemsContainer.appendChild(div);
+                });
+
+                const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                checkoutTotalEl.textContent = formatPrice(total);
+            }
+
+            renderCheckout();
+
+            // --- BUTTONS ---
+
+            // Confirm Checkout
+            // Confirm Checkout
+            confirmBtn?.addEventListener('click', () => {
+            const name = document.getElementById("shipName").value.trim();
+            const address = document.getElementById("shipAddress").value.trim();
+            const amount = parseFloat(document.getElementById("shipAmount").value);
+
+            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+            if (!name || !address || isNaN(amount)) {
+                alert("Please fill in all shipping info and amount.");
+                return;
+            }
+
+            if (amount < total) {
+                alert(`The amount entered ($${amount.toFixed(2)}) is less than the total cart amount ($${total.toFixed(2)}). Please enter the correct amount.`);
+                return;
+            }
+
+            alert(`Thank you, ${name}! Your order of $${total.toFixed(2)} has been confirmed.`);
+            cart = [];
+            saveCart();
+            renderCheckout();
+        });
+
+
+            // Cancel Checkout
+            cancelBtn?.addEventListener('click', () => {
+                window.location.href = "products.html";
+            });
+
+            // Clear Cart
+            clearAllBtn?.addEventListener('click', () => {
+                if (confirm("Are you sure you want to clear all items in the cart?")) {
+                    cart = [];
+                    if (cartKey) localStorage.setItem(cartKey, JSON.stringify([]));
+                    renderCheckout();
+                }
+            });
+
+            // Close modal
+            closeBtn?.addEventListener('click', () => {
+                checkoutModal.style.display = 'none';
+            });
+        });
+    </script>
+
+    <script src="../script.js"></script>
+</body>
+</html>

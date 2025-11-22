@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NinjaPets</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navdiv">
+                <div class="logo">
+                    <a href="#">NinjaPets</a>
+                </div>
+
+                <ul>
+                    <li class="homeli"><a href="about.html">About Us</a></li>
+                    <li class="homeli"><a href="products.html">Products</a></li>
+                </ul>
+
+                <ul>
+                     <!-- Login and Register/Logout and Cart will appear -->
+                    <li id="buttons"></li>
+
+                     <div id="cartWrap" aria-live="polite">
+                        <button id="cartBtn" class="cart-btn" aria-label="Open cart"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg><span id="cartCount" class="cart-count">0</span></button>   
+                    </div>
+                </ul>
+            </div>
+
+        </nav>
+    </header>
+
+    <main>
+        <section id="welcome-section">
+            <h1>Welcome to NinjaPets!</h1>
+            <p>Your one-stop for high-quality pet accessories.</p>
+        </section>
+
+        <section id="featured-products">
+            <h2>Our products</h2>
+            <div class="home-products">
+                <div class="home-product">
+                    <img src="../Assets/1.png" alt="Cat Collar">
+                    <h3>Cat Collar</h3>
+                    <p>Price: $50.00</p>
+                </div>
+                <div class="home-product">
+                    <img src="../Assets/2.png" alt="Dog Leash">
+                    <h3>Dog Leash</h3>
+                    <p>Price: $40.00</p>
+                </div>
+                <div class="home-product">
+                    <img src="../Assets/4.png" alt="Pearly Dog Necklace">
+                    <h3>Pearly Lune Necklace for Dogs</h3>
+                    <p>Price: $50.00</p>
+                </div>
+            </div>
+            <button class="add-cart-btn"><a href="products.html">See All Products</a></button>
+        </section>
+
+        <section id="about-preview" style="padding:20px; background-color:#f5f5f5;">
+            <h2>About NinjaPets</h2>
+            <p>We provide quality accessories for your pets, making sure they're happy and safe. <a href="about.html">Read more</a></p>
+        </section>
+
+        <section>
+            <!-- Cart modal -->
+            <div id="cartModal" class="cart-modal" aria-hidden="true" role="dialog" aria-label="Shopping cart">
+                <div class="cart-modal__backdrop" id="cartBackdrop"></div>
+                <div class="cart-modal__panel" role="document">
+                    <header class="cart-modal__header">
+                    <h2>Your Cart</h2>
+                    <button id="closeCart" aria-label="Close cart">✕</button>
+                    </header>
+
+                    <main class="cart-modal__body" id="cartItemsContainer">
+                    <!-- Items will be rendered here -->
+                    </main>
+
+                    <footer class="cart-modal__footer">
+                    <div class="cart-totals">
+                        <span>Total:</span> <strong id="cartTotal">$0.00</strong>
+                    </div>
+                    <div class="cart-actions">
+                        <button id="clearCartBtn" class="danger-btn">Clear Cart</button>
+                        <button id="checkoutBtn" class="primary-btn">Checkout</button>
+                    </div>
+                    </footer>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <script src="../script.js"></script>
+    
+
+</body>
+</html>

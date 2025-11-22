@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navdiv">
+                <div class="logo">
+                    <a href="index.html">NinjaPets</a>
+                </div>
+
+                <ul>
+                    <li class="homeli"><a href="about.html">About Us</a></li>
+                    <li class="homeli"><a href="products.html">Products</a></li>
+                </ul>
+
+                <ul>
+                     <!-- Placeholder where Login and Register/Logout will appear -->
+                    <li id="buttons"></li>
+
+                    <div id="cartWrap" aria-live="polite">
+                        <button id="cartBtn" class="cart-btn" aria-label="Open cart"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg><span id="cartCount" class="cart-count">0</span></button>   
+                    </div>
+                </ul>
+            </div>
+
+        </nav>
+    </header>
+
+    <main>
+        <section class="products-section">
+            <h2 class="products-title">Our Products</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="../Assets/5.png" alt="Dog Collar">
+                    <h3 class="product-name">Premium Dog Collar</h3>
+                    <p class="product-price">$20.00</p>
+                    <p class="product-desc">Durable nylon collar with adjustable strap.</p>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="../Assets/6.png" alt="Cat Toy">
+                    <h3 class="product-name">Interactive Cat Toy</h3>
+                    <p class="product-price">$15.00</p>
+                    <p class="product-desc">Keeps your cat active and entertained.</p>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="../Assets/7.png" alt="Dog Bowl">
+                    <h3 class="product-name">Stainless Steel Dog Bowl</h3>
+                    <p class="product-price">$18.00</p>
+                    <p class="product-desc">Easy to clean, rust-free bowl.</p>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="../Assets/8.png" alt="Pet Bed">
+                    <h3 class="product-name">Soft Pet Bed</h3>
+                    <p class="product-price">$60.00</p>
+                    <p class="product-desc">Comfortable plush bed for small and medium pets.</p>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="../Assets/1.png" alt="GPS Cat Collar">
+                    <h3 class="product-name">Cat Collar</h3>
+                    <p class="product-price">$50.00</p>
+                    <p class="product-desc">High-tech, adjustable cat collar designed for visibility and security, featuring a central holder for a GPS tracker</p>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="../Assets/4.png" alt="Pet necklace">
+                    <h3 class="product-name">Pearly Lune Necklace</h3>
+                    <p class="product-price">$50.99</p>
+                    <p class="product-desc">Elegant pet necklace featuring a strand of large, creamy faux pearls with a central, prominent gold-toned heart locket pendant.</p>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="../Assets/9.png" alt="Pet Harness">
+                    <h3 class="product-name">Adjustable Dog Harness</h3>
+                    <p class="product-price">$32.00</p>
+                    <p class="product-desc">Comfort-fit harness designed for safe daily walks.</p>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="../Assets/10.png" alt="Pet Water Bottle">
+                    <h3 class="product-name">Portable Water Bottle</h3>
+                    <p class="product-price">$22.50</p>
+                    <p class="product-desc">Leak-proof outdoor bottle for hydrating pets on the go.</p>
+                    <button class="add-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <!-- Cart modal -->
+            <div id="cartModal" class="cart-modal" aria-hidden="true" role="dialog" aria-label="Shopping cart">
+                <div class="cart-modal__backdrop" id="cartBackdrop"></div>
+                <div class="cart-modal__panel" role="document">
+                    <header class="cart-modal__header">
+                    <h2>Your Cart</h2>
+                    <button id="closeCart" aria-label="Close cart">✕</button>
+                    </header>
+
+                    <main class="cart-modal__body" id="cartItemsContainer">
+                    <!-- Items will be rendered here -->
+                    </main>
+
+                    <footer class="cart-modal__footer">
+                    <div class="cart-totals">
+                        <span>Total:</span> <strong id="cartTotal">$0.00</strong>
+                    </div>
+                    <div class="cart-actions">
+                        <button id="clearCartBtn" class="danger-btn">Clear Cart</button>
+                        <button id="checkoutBtn" class="primary-btn">Checkout</button>
+                    </div>
+                    </footer>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../script.js"></script>
+
+</body>
+</html>
