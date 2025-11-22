@@ -660,58 +660,130 @@ body.register-form h2 {
 
 
 
-/* Mobile First (default styles) already included above */
+/* ================================
+   RESPONSIVE DESIGN
+================================ */
 
-/* Tablet / small desktop: min-width 600px */
-@media (min-width: 600px) {
-    body.LoginForm, body.register-form {
-        padding: var(--sp-6);
-    }
+/* ----------- Tablets & Small Laptops (max-width: 950px) ----------- */
+@media (max-width: 950px) {
 
-    #loginForm, #registerForm {
-        padding: var(--sp-6);
-        max-width: 450px;
-    }
+  /* Navbar */
+  .navdiv {
+      padding: 0 10px;
+      gap: 15px;
+  }
+  .navbar ul {
+      gap: 15px;
+  }
+  #buttons button {
+      padding: 6px 12px;
+      font-size: 0.85rem;
+  }
 
-    #loginForm input, #registerForm input {
-        padding: var(--sp-4);
-        font-size: 1.05rem;
-    }
+  /* Products grid tighter */
+  .products-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--sp-4);
+  }
 
-    #loginForm button, #registerForm button {
-        font-size: 1.05rem;
-        padding: var(--sp-4);
-    }
+  /* Product cards */
+  .product-card img {
+      height: 170px;
+  }
 
-    #msg {
-        font-size: 1rem;
-        padding: var(--sp-4);
-    }
+  /* Home products */
+  .home-products {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  /* Cart modal */
+  .cart-modal__panel {
+      right: 10px;
+      width: min(380px, 92%);
+  }
+
+  /* About page */
+  .about-container {
+      padding: var(--sp-4);
+  }
 }
 
-/* Desktop: min-width 950px */
-@media (min-width: 950px) {
-    body.LoginForm, body.register-form {
-        padding: var(--sp-6);
-    }
+/* ----------- Mobile Phones (max-width: 600px) ----------- */
+@media (max-width: 600px) {
 
-    #loginForm, #registerForm {
-        max-width: 500px;
-        padding: var(--sp-6);
-    }
+  /* Navbar goes vertical */
+  .navdiv {
+      flex-direction: column;
+      gap: 12px;
+      padding: 0 10px;
+      text-align: center;
+  }
 
-    #loginForm input, #registerForm input {
-        font-size: var(--fs-large);
-        padding: var(--sp-4);
-    }
+  .navbar ul {
+      gap: 12px;
+  }
 
-    #loginForm button, #registerForm button {
-        font-size: var(--fs-large);
-        padding: var(--sp-4);
-    }
+  #buttons {
+      gap: 8px;
+  }
 
-    #msg {
-        font-size: var(--fs-base);
-        padding: var(--sp-4);
-    }
+  /* Welcome Section */
+  #welcome-section {
+      padding: 40px 10px;
+  }
+  #welcome-section h1 {
+      font-size: 1.6rem;
+  }
+  #welcome-section p {
+      font-size: 1rem;
+  }
+
+  /* Home products → 1 column */
+  .home-products {
+      grid-template-columns: 1fr;
+  }
+
+  /* Products page → 1 column */
+  .products-grid {
+      grid-template-columns: 1fr;
+  }
+
+  .product-card img {
+      height: 150px;
+  }
+
+  /* About page */
+  .about-container {
+      margin: var(--sp-4) auto;
+      padding: var(--sp-4);
+  }
+  .about-box {
+      padding: var(--sp-4);
+  }
+
+  /* Forms (login/register) full width */
+  body.LoginForm, 
+  body.register-form {
+      padding: var(--sp-3);
+  }
+  #loginForm, 
+  #registerForm {
+      width: 100%;
+      padding: var(--sp-4);
+  }
+
+  /* Cart modal for small screens */
+  .cart-modal__panel {
+      top: 20px;
+      right: 50%;
+      transform: translateX(50%);
+      width: 95%;
+      max-width: 380px;
+  }
+
+  .cart-item img {
+      width: 48px;
+      height: 48px;
+  }
 }
+
